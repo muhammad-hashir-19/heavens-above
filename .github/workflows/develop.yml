@@ -1,0 +1,37 @@
+name: Deployment Pipeline (Mock)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
+      - name: Simulate deployment
+        run: |
+          echo "Starting mock deployment"
+          mkdir -p mock-server
+          cp -r * mock-server/
+          echo "Mock deployment complete!"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployed-build
+          path: mock-server/

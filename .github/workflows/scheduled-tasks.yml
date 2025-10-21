@@ -1,0 +1,15 @@
+name: Scheduled Tasks
+
+on:
+  schedule:
+    - cron: "0 2 * * *"   # Runs daily at 2:00 
+  workflow_dispatch:
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run maintenance script
+        run: |
+          echo "Maintenance completed successfully!"

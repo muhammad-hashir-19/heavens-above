@@ -1,0 +1,20 @@
+name: Documentation Deployment
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/documentation.yml'
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build documentation
+        run: npm run docs:build
+      - name: Simulate documentation deployment
+        run: |
+          echo "📘 Building docs..."
+          echo "Deploying documentation to GitHub Pages (mock)..."
+          echo "✅ Docs deployment complete!"

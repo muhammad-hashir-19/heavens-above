@@ -5,7 +5,10 @@
   "description": "Scripts for scraping the Heavens Above website.",
   "main": "run.js",
   "scripts": {
-    "start": "node run.js"
+    "start": "node run.js",
+    "test": "jest",
+    "build": "echo \"Building project...\" && exit 0",
+    "docs:build": "echo \"Generating documentation...\" && exit 0"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
@@ -27,5 +30,9 @@
   "homepage": "https://github.com/PKUPI/heavens-above#readme",
   "engines": {
     "node": ">=12.10.0"
+  },
+  "devDependencies": {
+  "jest": "^30.2.0"
   }
+
 }

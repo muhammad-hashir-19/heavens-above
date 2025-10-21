@@ -1,0 +1,25 @@
+name: Custom Workflow - Release Notes Generator
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+jobs:
+  generate-release-notes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate release notes
+        run: |
+          echo "📝 Generating release notes for $GITHUB_REF..."
+          echo "Version: $GITHUB_REF_NAME" > release-notes.txt
+          echo "Changes:" >> release-notes.txt
+          git log -5 --pretty=format:"- %s" >> release-notes.txt
+          cat release-notes.txt
+      - name: Upload notes
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: release-notes.txt
