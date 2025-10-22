@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node run.js",
     "test": "jest",
-    "build": "echo \"Building project...\" && exit 0",
-    "docs:build": "echo \"Generating documentation...\" && exit 0"
+   "build": "echo \"Building project...\" && exit 0",
+  "docs:build": "echo \"Generating documentation...\" && exit 0"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
