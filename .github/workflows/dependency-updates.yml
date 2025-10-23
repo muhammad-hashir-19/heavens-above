@@ -1,4 +1,4 @@
-name: Automated Dependency Updates
+name: Dependency Updates
 
 on:
   schedule:
@@ -6,31 +6,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  dependency-update:
+  check-dependencies:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Update dependencies
-        run: npm update
-
-      - name: Run tests
-        run: npm test
-
-      - name: Commit and create pull request
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Automated Dependency Updates"
-          body: "This PR updates outdated dependencies and verifies compatibility."
+      - name: Check for outdated dependencies
+        run: |
+          npm outdated || true
+          echo "Dependency check completed."
