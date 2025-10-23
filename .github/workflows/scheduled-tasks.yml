@@ -1,8 +1,8 @@
-name: Scheduled Tasks
+name: Scheduled Maintenance Tasks
 
 on:
   schedule:
-    - cron: "0 2 * * *"   # Runs daily at 2:00 
+    - cron: "0 2 * * *"   # Runs daily at 2:00 AM UTC
   workflow_dispatch:
 
 jobs:
@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Run maintenance script
         run: |
+          echo "Starting daily maintenance at $(date)..."
+          # Example placeholder for real work:
+          # bash scripts/cleanup.sh
           echo "Maintenance completed successfully!"
+
+      - name: Log completion
+        run: echo "Maintenance finished at $(date)" >> maintenance_log.txt

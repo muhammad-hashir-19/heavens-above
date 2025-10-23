@@ -1,4 +1,4 @@
-name: Fixed deployment workflow
+name: Deployment Pipeline
 
 on:
   push:
@@ -7,28 +7,38 @@ on:
 jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup Node
+    steps:
+      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
+      
       - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
         run: |
-          echo " Running Jest tests..."
-          npm test || echo " Tests failed but continuing..."
+          echo "Installing project dependencies..."
+          npm ci
 
+      
+      - name: Run Jest tests
+        run: |
+          echo "Running automated tests..."
+          npm test
+
+     
       - name: Build project
         run: |
-          echo "Building project..."
-          npm run build || echo " Build failed but continuing..."
+          echo "Building the application..."
+          npm run build
 
-      - name: Mock deploy
+    
+      - name: Deploy application
         run: |
-          echo "Mock deployment complete!"
-          exit 0
+          echo "Starting mock deployment..."
+          echo "Deployment completed successfully!"
