@@ -6,7 +6,7 @@ module.exports = [
   {
     languageOptions: {
       globals: {
-        ...require("globals").node,  // ✅ allows require, module, exports, console, etc.
+        ...require("globals").node,  
       },
     },
     rules: {
