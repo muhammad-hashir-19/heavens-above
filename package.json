@@ -8,7 +8,9 @@
     "start": "node run.js",
     "test": "jest",
     "lint": "eslint .",
-    "build": "echo \"Building project...\""
+    "build": "echo \"Building project...\"",
+    "docs:build": "echo 'Building docs...' && mkdir -p docs && echo '<h1>Project Documentation</h1>' > docs/index.html"
+
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
