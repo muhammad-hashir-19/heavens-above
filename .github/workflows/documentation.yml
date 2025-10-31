@@ -7,9 +7,13 @@ on:
       - '.github/workflows/documentation.yml'
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build-docs:
@@ -19,17 +23,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
       - name: Prepare docs folder
         run: |
           echo "Preparing documentation for deployment..."
-          mkdir -p public
-          cp -r docs/* public/
+          mkdir -p ./_site
+          cp -r docs/* ./_site/
           echo "Documentation ready."
 
       - name: Upload docs artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public/
+          path: ./_site
 
   deploy-docs:
     runs-on: ubuntu-latest
