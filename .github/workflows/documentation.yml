@@ -41,11 +41,17 @@ jobs:
   deploy-docs:
     runs-on: ubuntu-latest
     needs: build-docs
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
+  
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy documentation to `gh-pages-docs` branch
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          branch: gh-pages-docs
+
