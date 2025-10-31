@@ -1,0 +1,35 @@
+name: Dependency Updates
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'  # every Monday at 3AM UTC
+  workflow_dispatch:
+
+jobs:
+  dependency-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check for outdated packages
+        run: npm outdated || true
+
+      - name: Log outdated dependencies
+        run: |
+          echo "Generating dependency report..."
+          npm outdated > dependency-report.txt || true
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-report
+          path: dependency-report.txt
