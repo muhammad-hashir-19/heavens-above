@@ -1,5 +1,6 @@
 ASSIGNMENT 2
 I233047
+Muhammad Hashir
 SCD
 SE-B
 Repo link:
