@@ -1,12 +1,12 @@
-// eslint.config.js
-import js from "@eslint/js";
+// eslint.config.js (CommonJS version)
+const js = require("@eslint/js");
 
-export default [
+module.exports = [
   js.configs.recommended,
   {
     rules: {
       "no-unused-vars": "warn",
-      "no-console": "off"
-    }
-  }
+      "no-console": "off",
+    },
+  },
 ];
